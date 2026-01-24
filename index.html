@@ -1,0 +1,18 @@
+<script>
+    function pressHome() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const deviceId = urlParams.get('deviceId');
+        if (!deviceId) {
+            console.error('deviceId is required');
+            return;
+        }
+        fetch(`/api/v1/devices/${deviceId}/shell`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ command: 'input keyevent 3' }), // KEYCODE_HOME
+        });
+    }
+</script>
+<button onclick="pressHome()">返回桌面</button>
